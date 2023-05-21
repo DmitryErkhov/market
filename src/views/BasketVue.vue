@@ -1,6 +1,6 @@
 <template>
     <div class="basket">
-        <div v-if="basketHave" class="no-basket">
+        <div v-if="cart.length == 0" class="no-basket">
             <h1>Корзина</h1>
             <p>Ваша корзина пуста</p>
             <div class="predlog">
@@ -9,15 +9,22 @@
                 <router-link class="router-link" v-for="(item, index) in listCard" :key="index" :to="{ path: '/product', query: { id: index}}">
                     <CardItem :price="item.price" :name_brand="item.name_brand" :name_model="item.name_model" :name_photo="item.name_photo" />
                 </router-link>
-    </div>
+                </div>
             </div>
         </div>
         <div v-else>
-          <BasketCar :price="listCard[1].price" :name_brand="listCard[1].name_brand" :name_model="listCard[1].name_model" :name_photo="listCard[1].name_photo"/>
+          <div class="cart">
+            <li v-for="(product, index) in cart" :key="index">
+                <BasketCar :price="product.price" :nameBrand="product.nameBrand" :nameModel="product.nameModel" :namePhoto="product.namePhoto"/>
+            </li>
+          </div>
+          <!--<BasketCar :price="listCard[1].price" :name_brand="listCard[1].name_brand" :name_model="listCard[1].name_model" :name_photo="listCard[1].name_photo"/>-->
           <div class="itog-price">
             <p>Итого</p>
-            <h3>К оплате 19 750 руб</h3>
-            <p class="border">Полосатый двубортный блейзер</p>
+            <h3>К оплате много руб</h3>
+            <li v-for="(product, index) in cart" :key="index">
+              <p class="border">{{ product.nameModel }}</p>
+            </li>
             <p class="border">Доставка</p>
             <p class="pad-88">Чтобы продолжить оформление заказа, необходимо</p>
             <p class="button">войти или зарегистрировать аккаунт</p>
@@ -37,6 +44,14 @@
       CardItem,
       BasketCar
   
+  },
+  computed: {
+    cart() {
+      return this.$store.state.cart;
+    },
+    cartTotal() {
+      return this.$store.getters.cartTotal;
+    },
   },
     data(){
       return{
@@ -74,6 +89,11 @@
   </script>
   
   <style lang="scss" scoped>
+
+  .cart{
+    display: flex;
+    flex-direction: column;
+  }
   .itog-price{
     display: flex;
     flex-direction: column;

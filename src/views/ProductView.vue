@@ -19,7 +19,10 @@ import ImgSet from '@/components/ImgSet.vue';
 import SelectButton3 from '@/components/SelectButton3.vue';
     export default {
         methods:{
-            addToBasket(){}
+            addToBasket(){
+                const product = this.listCard[this.id];
+                this.$store.dispatch('addToCart', product);
+            }
         },
         components:{
             ImgSet,

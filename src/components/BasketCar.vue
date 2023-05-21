@@ -1,13 +1,13 @@
 <template>
     <div class="content">
-        <img :src="require(`@/assets/img/${name_photo}`)" :alt="name_brand">
+        <img :src="require(`@/assets/img/${namePhoto}1.svg`)" :alt="nameBrand">
         <div class="desc">
             <h1>{{ price }}</h1>
             <div class="brand">
                 <p>Бренд</p>
-                <h2>{{ name_brand }}</h2>
+                <h2>{{ nameBrand }}</h2>
             </div>
-            <p class="marg-left">{{ name_model }}</p>
+            <p class="marg-left">{{ nameModel }}</p>
             <div class="logist">Доставка займёт от 5 до 10 дней</div>
         </div>
     </div>
@@ -19,13 +19,13 @@
             price:{
                 type: String,
             },
-            name_brand:{
+            nameBrand:{
                 type: String,
             },
-            name_model:{
+            nameModel:{
                 type: String,
             },
-            name_photo:{
+            namePhoto:{
                 type: String,
             }
         }
